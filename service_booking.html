@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Service</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .animate-fadeIn {
+      animation: fadeIn 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+  <div class="flex flex-col md:flex-row animate-fadeIn">
+    <!-- Service Provider Profile -->
+    <div class="bg-indigo-600 text-white p-8 md:w-1/3 lg:w-1/4">
+      <div class="sticky top-8">
+        <div class="text-center">
+          <div class="w-32 h-32 rounded-full mx-auto mb-4 border-4 border-white bg-white flex items-center justify-center">
+            <span class="text-indigo-600 text-xl font-bold">Service Provider</span>
+          </div>
+          <h2 class="text-2xl font-bold mb-2">John Doe</h2>
+          <p class="text-indigo-200 mb-2">Plumbing Services</p>
+          <p class="text-sm">Experience: 10 years</p>
+          <div class="mt-4 text-yellow-400">
+            ★★★★☆
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Booking Form -->
+    <div class="p-8 md:w-2/3 lg:w-3/4">
+      <h2 class="text-3xl font-bold text-gray-800 mb-6">Book Your Service</h2>
+
+      <div class="space-y-6 max-w-2xl mx-auto">
+        <!-- Price Per Hour -->
+        <div>
+          <label for="price" class="block text-sm font-medium text-gray-700">Price Per Hour</label>
+          <input type="text" id="price" value="$50" readonly class="mt-1 block w-full px-3 py-2 bg-gray-100 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <!-- Hours Selection -->
+        <div>
+          <label for="hours" class="block text-sm font-medium text-gray-700">Select Hours</label>
+          <select id="hours" onchange="updateTimeSlots(); calculateTotalPrice();" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            <option value="1">1 Hour</option>
+            <option value="2">2 Hours</option>
+            <option value="3">3 Hours</option>
+            <option value="4">4 Hours</option>
+          </select>
+        </div>
+
+        <!-- Time Slot Selection -->
+        <div>
+          <label for="time-slot" class="block text-sm font-medium text-gray-700">Select Time Slot</label>
+          <select id="time-slot" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+            <!-- Options will be dynamically populated -->
+          </select>
+        </div>
+
+        <!-- Problem Description -->
+        <div>
+          <label for="problem-description" class="block text-sm font-medium text-gray-700">Describe Your Problem</label>
+          <textarea id="problem-description" rows="4" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500" placeholder="Please describe the issue in detail..."></textarea>
+        </div>
+
+        <!-- Voice Message Upload -->
+        <div>
+          <label for="voice-message" class="block text-sm font-medium text-gray-700">Upload a Voice Message (optional)</label>
+          <input type="file" id="voice-message" accept="audio/*" class="mt-1 block w-full px-3 py-2 bg-white border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500">
+        </div>
+
+        <!-- Total Price -->
+        <div class="text-right">
+          <p class="text-lg font-semibold text-gray-800">Total Price: <span id="total-price" class="text-indigo-600">$50</span></p>
+        </div>
+
+        <!-- Submit Button -->
+        <button onclick="submitBooking()" class="w-full bg-indigo-600 text-white px-4 py-2 rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 transition duration-300 ease-in-out transform hover:-translate-y-1">
+          Confirm Booking
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const pricePerHour = 50;
+    const startTime = 9; // 9 AM
+
+    function updateTimeSlots() {
+      const hours = parseInt(document.getElementById('hours').value);
+      const timeSlotSelect = document.getElementById('time-slot');
+      timeSlotSelect.innerHTML = ''; // Clear existing options
+
+      for (let i = 0; i < 24 - hours; i++) {
+        const startHour = (startTime + i) % 24;
+        const endHour = (startHour + hours) % 24;
+        const option = document.createElement('option');
+        option.value = `${startHour}-${endHour}`;
+        option.textContent = `${formatHour(startHour)} - ${formatHour(endHour)}`;
+        timeSlotSelect.appendChild(option);
+      }
+    }
+
+    function formatHour(hour) {
+      const ampm = hour >= 12 ? 'PM' : 'AM';
+      const formattedHour = hour % 12 || 12;
+      return `${formattedHour}:00 ${ampm}`;
+    }
+
+    function calculateTotalPrice() {
+      const hours = document.getElementById('hours').value;
+      const totalPrice = hours * pricePerHour;
+      document.getElementById('total-price').textContent = `$${totalPrice}`;
+    }
+
+    function submitBooking() {
+      const hours = document.getElementById('hours').value;
+      const timeSlot = document.getElementById('time-slot').value;
+      const problemDescription = document.getElementById('problem-description').value;
+      const voiceMessage = document.getElementById('voice-message').files[0];
+
+      if (!problemDescription) {
+        alert('Please describe your problem before submitting.');
+        return;
+      }
+
+      const bookingDetails = {
+        pricePerHour,
+        hours,
+        timeSlot,
+        problemDescription,
+        voiceMessage: voiceMessage ? voiceMessage.name : 'No voice message uploaded',
+        totalPrice: hours * pricePerHour,
+      };
+
+      console.log('Booking Details:', bookingDetails);
+
+      // Simulating form submission
+      alert('Booking successfully completed!');
+    }
+
+    // Initialize time slots
+    updateTimeSlots();
+  </script>
+</body>
+</html>
