@@ -1,5 +1,7 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
+from flask_login import LoginManager
+from flask_bcrypt import Bcrypt
 
 
 app = Flask(__name__)
@@ -9,6 +11,9 @@ app.config['UPLOAD_FOLDER'] = 'static/uploads/'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16MB max upload size
 
 db = SQLAlchemy(app)
+bcrypt = Bcrypt(app)
+loginManager = LoginManager(app)
 
-from  backend import models  # import models after db is initialized
+from  backend import routes  # import models after db is initialized
+
 

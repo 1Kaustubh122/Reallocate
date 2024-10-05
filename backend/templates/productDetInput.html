@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Product</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+            margin-top: 50px;
+        }
+        .preview img {
+            max-height: 100px;
+            margin-right: 10px;
+        }
+        .slider-output {
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Upload Product</h2>
+
+        <!-- Flash Messages -->
+        {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <div class="alert alert-warning">
+                {{ messages[0] }}
+            </div>
+          {% endif %}
+        {% endwith %}
+
+        <form action="/upload_product" method="POST" enctype="multipart/form-data" onsubmit="return validateForm()">
+            <!-- Product Name -->
+            <div class="form-group">
+                <label for="product_name">Product Name</label>
+                <input type="text" class="form-control" id="product_name" name="product_name" required>
+            </div>
+            
+            <!-- Description -->
+            <div class="form-group">
+                <label for="description">Description</label>
+                <textarea class="form-control" id="description" name="description" rows="3" required></textarea>
+            </div>
+
+            <!-- Images (3 files) -->
+            <div class="form-group">
+                <label for="images">Upload Images (exactly 3 images, max 5MB each)</label>
+                <input type="file" class="form-control-file" id="images" name="images" accept="image/*" multiple required onchange="previewImages(this)">
+                <div id="imagePreview" class="preview mt-3"></div>
+            </div>
+
+            <!-- Video -->
+            <div class="form-group">
+                <label for="video">Upload Video (max 5MB)</label>
+                <input type="file" class="form-control-file" id="video" name="video" accept="video/*" required>
+            </div>
+
+            <!-- Rate (Slider) -->
+            <div class="form-group">
+                <label for="rate">Rental Rate (per day)</label>
+                <input type="range" class="form-control-range" id="rate" name="rate" min="0" max="1000" step="10" oninput="rateOutput.value = rate.value">
+                <output id="rateOutput" class="slider-output">500</output>
+            </div>
+
+            <!-- Location -->
+            <div class="form-group">
+                <label for="location">Location</label>
+                <input type="text" class="form-control" id="location" name="location" required>
+            </div>
+
+            <!-- Quantity -->
+            <div class="form-group">
+                <label for="quantity">Quantity Available</label>
+                <input type="number" class="form-control" id="quantity" name="quantity" min="1" required>
+            </div>
+
+            <!-- Purchased Date -->
+            <div class="form-group">
+                <label for="purchased_date">Purchased Date</label>
+                <input type="date" class="form-control" id="purchased_date" name="purchased_date" required>
+            </div>
+
+            <!-- Submit Button -->
+            <button type="submit" class="btn btn-primary btn-block">Submit Product</button>
+        </form>
+    </div>
+
+    <!-- Bootstrap JS and jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <!-- Custom JavaScript for validation and image preview -->
+    <script>
+        function previewImages(input) {
+            const preview = document.getElementById('imagePreview');
+            preview.innerHTML = '';
+            if (input.files) {
+                const fileArray = Array.from(input.files);
+                if (fileArray.length != 3) {
+                    alert('Please upload exactly 3 images.');
+                    input.value = '';
+                    return;
+                }
+
+                fileArray.forEach(file => {
+                    const reader = new FileReader();
+                    reader.onload = function (e) {
+                        const img = document.createElement('img');
+                        img.src = e.target.result;
+                        preview.appendChild(img);
+                    };
+                    reader.readAsDataURL(file);
+                });
+            }
+        }
+
+        function validateForm() {
+            const images = document.getElementById('images').files;
+            const video = document.getElementById('video').files[0];
+
+            // Ensure exactly 3 images are uploaded
+            if (images.length !== 3) {
+                alert('Please upload exactly 3 images.');
+                return false;
+            }
+
+            // Check image size (max 5MB per image)
+            for (let i = 0; i < images.length; i++) {
+                if (images[i].size > 5 * 1024 * 1024) {
+                    alert('Image size should be less than 5MB.');
+                    return false;
+                }
+            }
+
+            // Check video size (max 5MB)
+            if (video.size > 5 * 1024 * 1024) {
+                alert('Video size should be less than 5MB.');
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</body>
+</html>
