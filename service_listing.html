@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Service Providers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f2f2f2;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    header {
+      background-color: #012858;
+      padding: 10px 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #fff;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .search-bar {
+      flex-grow: 1;
+      margin: 0 20px;
+    }
+
+    .search-bar input {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      border-radius: 4px;
+    }
+
+    .filters {
+      background-color: #fff;
+      padding: 15px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .filters select {
+      margin-right: 10px;
+      padding: 8px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      background-color: #f8f8f8;
+    }
+
+    .service-listing {
+      max-width: 1200px;
+      margin: 20px auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 20px;
+      padding: 0 15px;
+    }
+
+    .service-card {
+      background-color: #fff;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      padding: 15px;
+      text-align: center;
+      transition: box-shadow 0.3s ease;
+    }
+
+    .service-card:hover {
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .service-card img {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      margin-bottom: 10px;
+    }
+
+    .rating {
+      color: #f90;
+      font-size: 1.2rem;
+    }
+
+    .view-details, .book-now {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 8px 12px;
+      background-color: #f0c14b;
+      border: 1px solid #a88734;
+      color: #111;
+      text-decoration: none;
+      border-radius: 3px;
+      font-size: 0.9rem;
+      transition: background-color 0.3s;
+    }
+
+    .view-details:hover, .book-now:hover {
+      background-color: #f4d078;
+    }
+
+    @media (max-width: 768px) {
+      .service-listing {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="header-content">
+      <div class="logo">Reallocate</div>
+      <div class="search-bar">
+        <input type="text" placeholder="Search for services...">
+      </div>
+    </div>
+  </header>
+
+  <div class="filters">
+    <select id="locationFilter" onchange="filterData()">
+      <option value="all">All Locations</option>
+      <option value="Chennai">New York</option>
+      <option value="Bombay">San Francisco</option>
+      <option value="Delhi">Los Angeles</option>
+    </select>
+    <select id="ratingFilter" onchange="filterData()">
+      <option value="all">All Ratings</option>
+      <option value="4">4 stars & up</option>
+      <option value="5">5 stars</option>
+    </select>
+  </div>
+
+  <div class="service-listing" id="service-list">
+    <!-- Service cards will be injected via JS -->
+  </div>
+
+  <script>
+    // Sample data and functions would go here
+    // This is a placeholder for demonstration purposes
+    async function fetchServiceProviders() {
+      const location = document.getElementById('locationFilter').value;
+      const rating = document.getElementById('ratingFilter').value;
+
+      // Dummy data for service providers
+      const providers = [
+        { id: 1, name: 'Mukhesh gutka walla', service: 'Plumbing', location: 'Chennai', experience: '5 years', rate: '50/hour', rating: 5 },
+        { id: 2, name: 'Mahesh ', service: 'Electrician', location: 'Banglore', experience: '10 years', rate: '70/hour', rating: 4 },
+        { id: 3, name: 'Mamta', service: 'Landscaping', location: 'Delhi', experience: '3 years', rate: '40/hour', rating: 5 },
+        { id: 4, name: 'Priyansh', service: 'House Cleaning', location: 'Mumbai', experience: '2 years', rate: '25/hour', rating: 1 },
+        { id: 5, name: 'Satyam', service: 'Carpentry', location: 'Banglore', experience: '7 years', rate: '60/hour', rating: 2 }
+      ];
+
+      // Filter based on selected location and rating
+      const filteredProviders = providers.filter(provider => {
+        const locationMatch = location === 'all' || provider.location === location;
+        const ratingMatch = rating === 'all' || provider.rating >= rating;
+        return locationMatch && ratingMatch;
+      });
+
+      renderServiceProviders(filteredProviders); // Render the fetched data
+    }
+
+    // Function to generate service provider cards
+    function renderServiceProviders(providers) {
+      const serviceList = document.getElementById('service-list');
+      serviceList.innerHTML = ''; // Clear the list
+
+      providers.forEach(provider => {
+        const serviceCard = document.createElement('div');
+        serviceCard.classList.add('service-card');
+        
+        serviceCard.innerHTML = `
+          <img src="https://via.placeholder.com/100" alt="${provider.name}">
+          <h3>${provider.name}</h3>
+          <p>Service: ${provider.service}</p>
+          <p>Location: ${provider.location}</p>
+          <p>Experience: ${provider.experience}</p>
+          <p>Hourly Rate: ${provider.rate}</p>
+          <div class="rating">${'⭐'.repeat(provider.rating)}</div>
+          <button class="view-details" onclick="viewProfile(${provider.id})">View Profile</button>
+          <button class="book-now" onclick="bookNow(${provider.id})">Book Now</button>
+        `;
+        serviceList.appendChild(serviceCard);
+      });
+    }
+
+    // Filter data based on location and rating
+    function filterData() {
+      fetchServiceProviders();
+    }
+
+    // Function to view profile details
+    function viewProfile(providerId) {
+      localStorage.setItem('selectedProviderId', providerId); // Store selected provider ID
+      window.location.href = 'profile.html'; // Redirect to profile page
+    }
+
+    // Function to handle booking action
+    function bookNow(providerId) {
+    //   alert(Booking request for provider ${providerId} has been sent!);
+      // Here you can add logic to handle the booking process
+    }
+
+    // Initialize the page by fetching and rendering the service providers
+    document.addEventListener('DOMContentLoaded', fetchServiceProviders);
+  </script>
+</body>
+</html>
