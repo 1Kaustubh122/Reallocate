@@ -86,7 +86,6 @@
         a.card-link:hover .glass-card {
             transform: translateY(-5px);
         }
-        /* New Styles for Renter and Consumer Buttons */
         .btn-renter {
             background-color: #4CAF50; /* Green */
             color: white;
@@ -107,8 +106,20 @@
             transform: translateY(-2px);
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
-        .btn-service{
-            background-color:rgb(175, 158, 0) ;
+        .btn-service {
+            background-color: rgb(175, 158, 0);
+        }
+        .icon-container {
+            background: white;
+            color: #000;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 0 auto;
+            margin-bottom: 15px;
         }
     </style>
 </head>
@@ -161,38 +172,56 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-tools fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Home Maintenance & Repair Services</h3>
                         <p class="text-sm">Electricians, Plumbers, Carpenters, Appliance Repair Technicians , Roofers, Painters, Masons etc......</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
-                        <h3 class="text-xl font-semibold mb-2">Cleaning Services2</h3>
+                        <div class="icon-container">
+                            <i class="fas fa-broom fa-2x"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">Cleaning Services</h3>
                         <p class="text-sm">House Cleaners, Carpet Cleaners, Window Cleaners, Move-in/Move-out Cleaners etc.........</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-leaf fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Landscaping & Outdoor Services</h3>
                         <p class="text-sm">Gardeners/Landscapers, Lawn Care Specialists, Irrigation System Installers, Snow Removal Services</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-child fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Personal and Family Services</h3>
-                        <p class="text-sm">Babysitters, Tutors, Personal trainers, Housekeepers etc.....</p>
+                        <p class="text-sm">Babysitters, Tutors, Personal Trainers, Housekeepers etc.......</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-hard-hat fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Construction & Renovation</h3>
-                        <p class="text-sm">General Contractors, Plasterers/Drywall Installers, Tilers, Kitchen/Bathroom Remodelers etc.......</p>
+                        <p class="text-sm">General Contractors, Plasterers/Drywall Installers, Tilers, Kitchen/Bathroom Remodelers etc...</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
-                        <h1 class="text-xl font-semibold mb-2"> </h1>
-                        <p class="text-sm">AND MANY MORE.......</p>
+                        <div class="icon-container">
+                            <i class="fas fa-ellipsis-h fa-2x"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">And Many More...</h3>
+                        <p class="text-sm">Explore other services we offer!</p>
                     </div>
                 </a>
             </div>
@@ -206,107 +235,65 @@
             <div class="grid grid-cols-2 md:grid-cols-3 gap-8">
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
-                        <img src="./imgs/tech.jpg" width = "100%">
+                        <div class="icon-container">
+                            <i class="fas fa-vr-cardboard fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Technology and Gadgets</h3>
-                        <p class="text-sm">Virtual Reality (VR) Headsets, Drones, High-end Cameras (DSLRs, mirrorless cameras, GoPros) and many more</p>
+                        <p class="text-sm">VR Headsets, Drones, High-end Cameras (DSLRs, GoPros) and many more.......</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
-                        
+                        <div class="icon-container">
+                            <i class="fas fa-camera fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Photography and Filmmaking Equipment</h3>
-                        <p class="text-sm">Camera Lenses, Lighting Kits, Tripods and Gimbals, </p>
+                        <p class="text-sm">Camera Lenses, Lighting Kits, Tripods, and Gimbals</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-hiking fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Outdoor and Adventure Gear</h3>
-                        <p class="text-sm">Camping Equipment, E-Bikes, Hiking Gear , Fishing Gear and more...</p>
+                        <p class="text-sm">Camping Equipment, E-Bikes, Hiking Gear, Fishing Gear, and more.......</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-microphone-alt fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Event and Party Supplies</h3>
-                        <p class="text-sm">Sound Systems, Tents and Canopies ,Lighting Equipment and more.....</p>
+                        <p class="text-sm">Sound Systems, Tents, Canopies, Lighting Equipment......</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
+                        <div class="icon-container">
+                            <i class="fas fa-music fa-2x"></i>
+                        </div>
                         <h3 class="text-xl font-semibold mb-2">Music and Entertainment</h3>
-                        <p class="text-sm">Musical Instruments, Professional Audio Equipment, Karaoke Machines and more....</p>
+                        <p class="text-sm">Musical Instruments, Karaoke Machines, and more...</p>
                     </div>
                 </a>
                 <a href="#" class="card-link">
                     <div class="glass-card p-6 text-center h-48 flex flex-col justify-between">
-                        <h3 class="text-xl font-semibold mb-2">and many more....</h3>
-                        <!-- <p class="text-sm">Description goes here</p> -->
+                        <div class="icon-container">
+                            <i class="fas fa-ellipsis-h fa-2x"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-2">And Many More...</h3>
+                        <p class="text-sm">Discover other rental products available!</p>
                     </div>
                 </a>
-            </div>
-        </div>
-    </section>
-
-    <!-- How It Works -->
-    <section class="py-20">
-        <div class="container mx-auto px-6">
-            <h2 class="text-4xl font-bold mb-16 text-center section-title">How It Works</h2>
-            <div class="flex flex-wrap justify-center items-center">
-                <div class="w-full md:w-1/3 text-center px-4 mb-8">
-                    <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-blue-500 text-3xl font-bold">1</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">List or Browse</h3>
-                    <p>List your services or products, or browse what's available in your area.</p>
-                </div>
-                <div class="w-full md:w-1/3 text-center px-4 mb-8">
-                    <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-blue-500 text-3xl font-bold">2</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Connect</h3>
-                    <p>Reach out to service providers or product owners through our secure platform.</p>
-                </div>
-                <div class="w-full md:w-1/3 text-center px-4 mb-8">
-                    <div class="bg-white rounded-full h-20 w-20 flex items-center justify-center mx-auto mb-4">
-                        <span class="text-blue-500 text-3xl font-bold">3</span>
-                    </div>
-                    <h3 class="text-xl font-semibold mb-2">Enjoy</h3>
-                    <p>Get the service you need or enjoy your rented product with peace of mind.</p>
-                </div>
             </div>
         </div>
     </section>
 
     <!-- Footer -->
-    <footer class="bg-gray-800 text-white py-10">
-        <div class="container mx-auto px-6">
-            <div class="flex flex-wrap justify-between">
-                <div class="w-full md:w-1/4 mb-6 md:mb-0">
-                    <h3 class="text-2xl font-bold mb-4">Reallocate</h3>
-                    <p>Connecting communities through resource sharing.</p>
-                </div>
-                <div class="w-full md:w-1/4 mb-6 md:mb-0">
-                    <h4 class="text-lg font-semibold mb-4">Quick Links</h4>
-                    <ul>
-                        <li><a href="#" class="hover:text-gray-300">About Us</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Services</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Rentals</a></li>
-                        <li><a href="#" class="hover:text-gray-300">Contact</a></li>
-                    </ul>
-                </div>
-                <div class="w-full md:w-1/4 mb-6 md:mb-0">
-                    <h4 class="text-lg font-semibold mb-4">Follow Us</h4>
-                    <div class="flex space-x-4">
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-facebook"></i></a>
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="hover:text-gray-300"><i class="fab fa-linkedin"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div class="border-t border-gray-700 mt-8 pt-8 text-sm text-center">
-                <p>&copy; 2024 Reallocate. All rights reserved.</p>
-            </div>
-        </div>
+    <footer class="py-6 text-center text-white">
+        <p>&copy; 2024 Reallocate. All rights reserved.</p>
     </footer>
 </body>
 </html>
