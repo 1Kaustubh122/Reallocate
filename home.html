@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reallocate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e0 #f3f4f6;
+            padding-bottom: 1rem;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
+
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e0;
+            border-radius: 20px;
+            border: 3px solid #f3f4f6;
+        }
+
+        .card {
+            flex: 0 0 auto;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        .product-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600">Reallocate</a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#services-section" class="text-gray-600 hover:text-blue-600">Services</a>
+                    <a href="#products-section" class="text-gray-600 hover:text-blue-600">Products</a>
+                    <!-- <a href="#" class="text-gray-600 hover:text-blue-600">Login</a> -->
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="bg-blue-50 py-20">
+        <div class="max-w-7xl mx-auto text-center px-4">
+            <h1 class="text-4xl font-bold text-gray-900 mb-4">Find Local Services & Rent Products Near You</h1>
+            <p class="text-xl text-gray-600 mb-8">Connect with trusted local service providers or rent products from your neighbors.</p>
+            <a href="#" class="bg-blue-600 text-white py-3 px-8 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Get Started</a>
+        </div>
+    </section>
+
+    <!-- Service Categories Section with Horizontal Scroll -->
+    <section id="services-section" class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center text-gray-900 mb-12">Our Services</h2>
+            <div class="horizontal-scroll space-x-6">
+                <!-- Service Card 1 -->
+                <div class="card bg-white rounded-lg shadow p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-bolt text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Electricians</h3>
+                    <p class="text-gray-600">Expert electricians for all your electrical needs.</p>
+                </div>
+                <!-- Service Card 2 -->
+                <div class="card bg-white rounded-lg shadow p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-wrench text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Plumbers</h3>
+                    <p class="text-gray-600">Professional plumbing services for your home.</p>
+                </div>
+                <!-- Service Card 3 -->
+                <div class="card bg-white rounded-lg shadow p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-paint-roller text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Painters</h3>
+                    <p class="text-gray-600">Skilled painters to transform your space.</p>
+                </div>
+                <!-- Service Card 4 -->
+                <div class="card bg-white rounded-lg shadow p-6">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mb-4">
+                        <i class="fas fa-tools text-blue-600 text-2xl"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-900 mb-2">Handymen</h3>
+                    <p class="text-gray-600">Versatile handymen for various home repairs.</p>
+                </div>
+                <!-- Add more service cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products-section" class="py-16 bg-gray-100">
+        <div class="max-w-7xl mx-auto">
+            <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Popular Rental Products</h2>
+            <div class="horizontal-scroll space-x-8">
+                <!-- Product Card 1 -->
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-vr-cardboard"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">VR Headsets</h3>
+                    <p class="mt-4 text-gray-600">Rent a VR headset for an immersive gaming experience.</p>
+                </div>
+                <!-- Product Card 2 -->
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">PlayStation 5</h3>
+                    <p class="mt-4 text-gray-600">Enjoy next-gen gaming with a rented PlayStation 5.</p>
+                </div>
+                <!-- Product Card 3 -->
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-helicopter"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Drones</h3>
+                    <p class="mt-4 text-gray-600">Capture aerial footage with a rented high-end drone.</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Cameras</h3>
+                    <p class="mt-4 text-gray-600">Rent a Camera for capturing your beutiful moments</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-guitar"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Musical instruments</h3>
+                    <p class="mt-4 text-gray-600">Rent a Musical instruments for playing out your thoughts.</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-music"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Sound Systems</h3>
+                    <p class="mt-4 text-gray-600">Rent a Sound system for dancing and immersing in music you love.</p>
+                </div>
+                <div class="card bg-white rounded-lg shadow-md p-8 text-center w-72 flex-shrink-0">
+                    <div class="card-icon mx-auto">
+                        <i class="fas fa-tent"></i>
+                    </div>
+                    <h3 class="text-xl font-semibold text-gray-800">Campign tents</h3>
+                    <p class="mt-4 text-gray-600">Rent Camping tents for spending a night inside a rain forest .</p>
+                </div>
+                <!-- Add more Product Cards as needed -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2024 Reallocate. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
