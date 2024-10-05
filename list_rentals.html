@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Available Items for Rent - Reallocate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
+        .card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600">Reallocate</a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Services</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Products</a>
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="bg-blue-50 py-12">
+        <div class="max-w-7xl mx-auto text-center px-4">
+            <h1 class="text-3xl font-bold text-gray-900 mb-4">Available Items for Rent</h1>
+            <p class="text-xl text-gray-600">Find and rent the items you need from our wide selection.</p>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto py-12 px-4">
+        <div id="item-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Item cards will be dynamically inserted here -->
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2024 Reallocate. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        const sampleItems = [
+            {
+                id: 1,
+                name: 'Mountain Bike',
+                description: 'A sturdy mountain bike for off-road adventures.',
+                price: '$15/day',
+                image: '/api/placeholder/300/200'
+            },
+            {
+                id: 2,
+                name: 'Camping Tent',
+                description: 'A waterproof camping tent that fits 4 people.',
+                price: '$25/day',
+                image: '/api/placeholder/300/200'
+            },
+            {
+                id: 3,
+                name: 'DJ Equipment',
+                description: 'Professional DJ equipment for parties and events.',
+                price: '$100/day',
+                image: '/api/placeholder/300/200'
+            },
+            {
+                id: 4,
+                name: 'Kayak',
+                description: 'Single-person kayak for lakes and rivers.',
+                price: '$20/day',
+                image: '/api/placeholder/300/200'
+            }
+        ];
+
+        async function fetchItems() {
+            return new Promise((resolve) => {
+                setTimeout(() => {
+                    resolve(sampleItems);
+                }, 1000);
+            });
+        }
+
+        async function displayItems() {
+            const items = await fetchItems();
+            const itemList = document.getElementById('item-list');
+
+            items.forEach(item => {
+                const itemCard = document.createElement('div');
+                itemCard.className = 'card bg-white rounded-lg shadow p-6';
+                itemCard.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="w-full h-48 object-cover rounded-lg mb-4">
+                    <h2 class="text-xl font-semibold text-gray-900 mb-2">${item.name}</h2>
+                    <p class="text-gray-600 mb-4">${item.description}</p>
+                    <p class="text-lg font-semibold text-blue-600 mb-4">${item.price}</p>
+                    <div class="flex justify-between">
+                        <button onclick="rentItem(${item.id})" class="bg-blue-600 text-white py-2 px-4 rounded-lg font-semibold hover:bg-blue-700 transition duration-300">Rent Now</button>
+                        <button onclick="viewDetails(${item.id})" class="bg-gray-200 text-gray-800 py-2 px-4 rounded-lg font-semibold hover:bg-gray-300 transition duration-300">View Details</button>
+                    </div>
+                `;
+
+                itemList.appendChild(itemCard);
+            });
+        }
+
+        function rentItem(itemId) {
+            alert(`You have selected item ID: ${itemId} for rent.`);
+        }
+
+        function viewDetails(itemId) {
+            alert(`Viewing details for item ID: ${itemId}.`);
+        }
+
+        window.onload = displayItems;
+    </script>
+</body>
+</html>
