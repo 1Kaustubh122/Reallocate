@@ -1,219 +1,158 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Service Providers</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background-color: #f2f2f2;
-      color: #333;
-      line-height: 1.6;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Providers</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f3f4f6;
+            color: #1f2937;
+        }
 
-    header {
-      background-color: #012858;
-      padding: 10px 0;
-    }
+        .horizontal-scroll {
+            display: flex;
+            overflow-x: auto;
+            scrollbar-width: thin;
+            scrollbar-color: #cbd5e0 #f3f4f6;
+            padding-bottom: 1rem;
+        }
 
-    .header-content {
-      max-width: 1200px;
-      margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
+        .horizontal-scroll::-webkit-scrollbar {
+            height: 8px;
+        }
 
-    .logo {
-      color: #fff;
-      font-size: 24px;
-      font-weight: bold;
-    }
+        .horizontal-scroll::-webkit-scrollbar-track {
+            background: #f3f4f6;
+        }
 
-    .search-bar {
-      flex-grow: 1;
-      margin: 0 20px;
-    }
+        .horizontal-scroll::-webkit-scrollbar-thumb {
+            background-color: #cbd5e0;
+            border-radius: 20px;
+            border: 3px solid #f3f4f6;
+        }
 
-    .search-bar input {
-      width: 100%;
-      padding: 10px;
-      border: none;
-      border-radius: 4px;
-    }
+        .card {
+            flex: 0 0 auto;
+            width: 300px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
 
-    .filters {
-      background-color: #fff;
-      padding: 15px;
-      border-bottom: 1px solid #ddd;
-    }
-
-    .filters select {
-      margin-right: 10px;
-      padding: 8px;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      background-color: #f8f8f8;
-    }
-
-    .service-listing {
-      max-width: 1200px;
-      margin: 20px auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-      gap: 20px;
-      padding: 0 15px;
-    }
-
-    .service-card {
-      background-color: #fff;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-      padding: 15px;
-      text-align: center;
-      transition: box-shadow 0.3s ease;
-    }
-
-    .service-card:hover {
-      box-shadow: 0 0 10px rgba(0,0,0,0.1);
-    }
-
-    .service-card img {
-      width: 100px;
-      height: 100px;
-      border-radius: 50%;
-      margin-bottom: 10px;
-    }
-
-    .rating {
-      color: #f90;
-      font-size: 1.2rem;
-    }
-
-    .view-details, .book-now {
-      display: inline-block;
-      margin-top: 10px;
-      padding: 8px 12px;
-      background-color: #f0c14b;
-      border: 1px solid #a88734;
-      color: #111;
-      text-decoration: none;
-      border-radius: 3px;
-      font-size: 0.9rem;
-      transition: background-color 0.3s;
-    }
-
-    .view-details:hover, .book-now:hover {
-      background-color: #f4d078;
-    }
-
-    @media (max-width: 768px) {
-      .service-listing {
-        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      }
-    }
-  </style>
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+    </style>
 </head>
 <body>
-  <header>
-    <div class="header-content">
-      <div class="logo">Reallocate</div>
-      <div class="search-bar">
-        <input type="text" placeholder="Search for services...">
-      </div>
-    </div>
-  </header>
+    <!-- Navigation Bar -->
+    <nav class="bg-white shadow">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="#" class="text-2xl font-bold text-blue-600">Reallocate</a>
+                </div>
+                <div class="flex items-center space-x-8">
+                    <a href="#" class="text-gray-600 hover:text-blue-600">Home</a>
+                    <a href="#services-section" class="text-gray-600 hover:text-blue-600">Services</a>
+                    <a href="#products-section" class="text-gray-600 hover:text-blue-600">Products</a>
+                </div>
+            </div>
+        </div>
+    </nav>
 
-  <div class="filters">
-    <select id="locationFilter" onchange="filterData()">
-      <option value="all">All Locations</option>
-      <option value="Chennai">New York</option>
-      <option value="Bombay">San Francisco</option>
-      <option value="Delhi">Los Angeles</option>
-    </select>
-    <select id="ratingFilter" onchange="filterData()">
-      <option value="all">All Ratings</option>
-      <option value="4">4 stars & up</option>
-      <option value="5">5 stars</option>
-    </select>
-  </div>
+    <!-- Filters Section -->
+    <section class="bg-blue-50 py-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <h2 class="text-3xl font-bold text-gray-900">Find Service Providers</h2>
+                <div class="flex space-x-4">
+                    <select id="locationFilter" class="border border-gray-300 rounded-lg py-2 px-4" onchange="filterData()">
+                        <option value="all">All Locations</option>
+                        <option value="New York">New York</option>
+                        <option value="San Francisco">San Francisco</option>
+                        <option value="Los Angeles">Los Angeles</option>
+                    </select>
+                    <select id="ratingFilter" class="border border-gray-300 rounded-lg py-2 px-4" onchange="filterData()">
+                        <option value="all">All Ratings</option>
+                        <option value="4">4 stars & up</option>
+                        <option value="5">5 stars</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <div class="service-listing" id="service-list">
-    <!-- Service cards will be injected via JS -->
-  </div>
+    <!-- Service Providers Listing -->
+    <section class="py-16">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="service-list">
+                <!-- Service cards will be injected here -->
+            </div>
+        </div>
+    </section>
 
-  <script>
-    // Sample data and functions would go here
-    // This is a placeholder for demonstration purposes
-    async function fetchServiceProviders() {
-      const location = document.getElementById('locationFilter').value;
-      const rating = document.getElementById('ratingFilter').value;
+    <!-- Footer -->
+    <footer class="bg-gray-100 py-8">
+        <div class="max-w-7xl mx-auto px-4 text-center text-gray-600">
+            <p>&copy; 2024 Reallocate. All rights reserved.</p>
+        </div>
+    </footer>
 
-      // Dummy data for service providers
-      const providers = [
-        { id: 1, name: 'Mukhesh gutka walla', service: 'Plumbing', location: 'Chennai', experience: '5 years', rate: '50/hour', rating: 5 },
-        { id: 2, name: 'Mahesh ', service: 'Electrician', location: 'Banglore', experience: '10 years', rate: '70/hour', rating: 4 },
-        { id: 3, name: 'Mamta', service: 'Landscaping', location: 'Delhi', experience: '3 years', rate: '40/hour', rating: 5 },
-        { id: 4, name: 'Priyansh', service: 'House Cleaning', location: 'Mumbai', experience: '2 years', rate: '25/hour', rating: 1 },
-        { id: 5, name: 'Satyam', service: 'Carpentry', location: 'Banglore', experience: '7 years', rate: '60/hour', rating: 2 }
-      ];
+    <script>
+        async function fetchServiceProviders() {
+            const location = document.getElementById('locationFilter').value;
+            const rating = document.getElementById('ratingFilter').value;
 
-      // Filter based on selected location and rating
-      const filteredProviders = providers.filter(provider => {
-        const locationMatch = location === 'all' || provider.location === location;
-        const ratingMatch = rating === 'all' || provider.rating >= rating;
-        return locationMatch && ratingMatch;
-      });
+            // Dummy data for service providers
+            const providers = [
+                { id: 1, name: 'Mukesh', service: 'Plumbing', location: 'New York', experience: '5 years', rate: '50/hour', rating: 5 },
+                { id: 2, name: 'Mahesh', service: 'Electrician', location: 'San Francisco', experience: '10 years', rate: '70/hour', rating: 4 },
+                { id: 3, name: 'Mamta', service: 'Landscaping', location: 'Los Angeles', experience: '3 years', rate: '40/hour', rating: 5 },
+                { id: 4, name: 'Priyansh', service: 'House Cleaning', location: 'New York', experience: '2 years', rate: '25/hour', rating: 1 },
+                { id: 5, name: 'Satyam', service: 'Carpentry', location: 'San Francisco', experience: '7 years', rate: '60/hour', rating: 2 }
+            ];
 
-      renderServiceProviders(filteredProviders); // Render the fetched data
-    }
+            const filteredProviders = providers.filter(provider => {
+                const locationMatch = location === 'all' || provider.location === location;
+                const ratingMatch = rating === 'all' || provider.rating >= rating;
+                return locationMatch && ratingMatch;
+            });
 
-    // Function to generate service provider cards
-    function renderServiceProviders(providers) {
-      const serviceList = document.getElementById('service-list');
-      serviceList.innerHTML = ''; // Clear the list
+            renderServiceProviders(filteredProviders);
+        }
 
-      providers.forEach(provider => {
-        const serviceCard = document.createElement('div');
-        serviceCard.classList.add('service-card');
-        
-        serviceCard.innerHTML = `
-          <img src="https://via.placeholder.com/100" alt="${provider.name}">
-          <h3>${provider.name}</h3>
-          <p>Service: ${provider.service}</p>
-          <p>Location: ${provider.location}</p>
-          <p>Experience: ${provider.experience}</p>
-          <p>Hourly Rate: ${provider.rate}</p>
-          <div class="rating">${'⭐'.repeat(provider.rating)}</div>
-          <button class="view-details" onclick="viewProfile(${provider.id})">View Profile</button>
-          <button class="book-now" onclick="bookNow(${provider.id})">Book Now</button>
-        `;
-        serviceList.appendChild(serviceCard);
-      });
-    }
+        function renderServiceProviders(providers) {
+            const serviceList = document.getElementById('service-list');
+            serviceList.innerHTML = '';
 
-    // Filter data based on location and rating
-    function filterData() {
-      fetchServiceProviders();
-    }
+            providers.forEach(provider => {
+                const serviceCard = document.createElement('div');
+                serviceCard.classList.add('bg-white', 'rounded-lg', 'shadow-md', 'p-6', 'text-center', 'hover:shadow-lg', 'transition');
 
-    // Function to view profile details
-    function viewProfile(providerId) {
-      localStorage.setItem('selectedProviderId', providerId); // Store selected provider ID
-      window.location.href = 'profile.html'; // Redirect to profile page
-    }
+                serviceCard.innerHTML = `
+                    <img src="https://via.placeholder.com/100" alt="${provider.name}" class="rounded-full mx-auto mb-4">
+                    <h3 class="text-xl font-semibold text-gray-800">${provider.name}</h3>
+                    <p class="text-gray-600 mb-2">Service: ${provider.service}</p>
+                    <p class="text-gray-600 mb-2">Location: ${provider.location}</p>
+                    <p class="text-gray-600 mb-2">Experience: ${provider.experience}</p>
+                    <p class="text-gray-600 mb-4">Hourly Rate: ${provider.rate}</p>
+                    <div class="text-yellow-500 text-lg mb-4">${'⭐'.repeat(provider.rating)}</div>
+                    <a href="serviceproviderdetails.html?id=${provider.id}" class="bg-blue-600 text-white py-2 px-4 rounded-lg hover:bg-blue-700 transition">View Profile</a>
+                    <button class="bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600 transition ml-2">Book Now</button>
+                `;
+                serviceList.appendChild(serviceCard);
+            });
+        }
 
-    // Function to handle booking action
-    function bookNow(providerId) {
-    //   alert(Booking request for provider ${providerId} has been sent!);
-      // Here you can add logic to handle the booking process
-    }
+        function filterData() {
+            fetchServiceProviders();
+        }
 
-    // Initialize the page by fetching and rendering the service providers
-    document.addEventListener('DOMContentLoaded', fetchServiceProviders);
-  </script>
+        document.addEventListener('DOMContentLoaded', fetchServiceProviders);
+    </script>
 </body>
 </html>
+
