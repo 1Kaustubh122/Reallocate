@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Renter Register</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #062f53, #000000); /* Background gradient */
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .signup-container {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+
+        .signup-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #062f53;
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .input-field:focus {
+            border-color: #062f53;
+            outline: none;
+        }
+
+        .submit-btn {
+            width: 100%;
+            background-color: #062f53;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #00f2fe;
+        }
+
+        .otp-btn {
+            width: auto;
+            background-color: #e0e0e0;
+            color: #062f53;
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto 20px auto;
+        }
+
+        .otp-btn:hover {
+            background-color: #d0d0d0;
+        }
+
+        #otp-section {
+            margin-top: 20px;
+        }
+
+        .signup-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #062f53;
+        }
+
+        .signup-footer a {
+            color: #00f2fe;
+            text-decoration: underline;
+        }
+
+        .signup-footer a:hover {
+            color: #4facfe;
+        }
+    </style>
+</head>
+<body>
+    
+
+    <div class="signup-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="signup-title">Renting Sign Up</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="text" name="name" placeholder="Name"  value="{{ name or '' }}" class="input-field" required>
+            <input type="tel" name="phone_number" placeholder="Phone Number" value="{{ phone_number or '' }}" class="input-field" required>
+            <input type="text" id="location" name="location" placeholder="Location" value="{{ location or '' }}"  class="input-field" required>
+            <button type="button" class="otp-btn" onclick="getLocation()">Auto-detect Location</button>
+            <input type="text" name="aadhar_number" placeholder="Aadhar Number" value="{{ aadhar_number or '' }}" class="input-field" required>
+            <input type="email" name="email" placeholder="Email Address" value="{{ email or '' }}" class="input-field" required>
+            <input type="password" name="password" placeholder="Password" class="input-field" required>
+            <input type="password" name="confirm_password" placeholder="Confirm Password" class="input-field" required>
+            
+            <button type="submit" class="submit-btn">Sign Up</button>
+        </form>
+    
+
+        <div class="signup-footer">
+            <p>Already have an account? <a href="{{ url_for('login_renter') }}">Login</a></p>
+        </div>
+    </div>
+
+
+<script>
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition, showError);
+        } else {
+            alert("Geolocation is not supported by this browser.");
+        }
+    }
+
+    function showPosition(position) {
+        const lat = position.coords.latitude;
+        const lon = position.coords.longitude;
+
+        // Use OpenStreetMap's Nominatim API to get the address from lat, lon
+        fetch(`https://nominatim.openstreetmap.org/reverse?lat=${lat}&lon=${lon}&format=json`)
+        .then(response => response.json())
+        .then(data => {
+            if (data && data.address) {
+                const address = `${data.address.road || ''}, ${data.address.city || data.address.town || ''}, ${data.address.state || ''}, ${data.address.country || ''}`;
+                document.getElementById("location").value = address;
+            } else {
+                alert("Unable to fetch address.");
+            }
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Geolocation failed.");
+        });
+    }
+
+    function showError(error) {
+        switch(error.code) {
+            case error.PERMISSION_DENIED:
+                alert("User denied the request for Geolocation.");
+                break;
+            case error.POSITION_UNAVAILABLE:
+                alert("Location information is unavailable.");
+                break;
+            case error.TIMEOUT:
+                alert("The request to get user location timed out.");
+                break;
+            case error.UNKNOWN_ERROR:
+                alert("An unknown error occurred.");
+                break;
+        }
+    }
+</script>
+
+    
+
+</body>
+</html>

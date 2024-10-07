@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream:customerlogin.html
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -144,3 +145,138 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Reallocate</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(to right, #f0f4f8, #ffffff); /* Light background gradient */
+            min-height: 100vh;
+            background-attachment: fixed;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            background-color: rgba(255, 255, 255, 0.95); /* Slightly transparent white background */
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+        }
+
+        .login-title {
+            font-size: 2rem;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 20px;
+            color: #2c3e50; /* Dark blue for the title */
+        }
+
+        .input-field {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 1px solid #bdc3c7; /* Light grey border */
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        .input-field:focus {
+            border-color: #3498db; /* Focus color for input fields */
+            outline: none;
+        }
+
+        /* Style for the Submit Button (Login) */
+        .submit-btn {
+            width: 100%;
+            background-color: #3498db; /* Blue button color */
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.25rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background-color: #2980b9; /* Darker blue on hover */
+        }
+
+        /* Style for the OTP Button */
+        .otp-btn {
+            width: auto;
+            background-color: #ecf0f1; /* Light grey for the OTP button */
+            color: #2c3e50; /* Dark blue text for OTP button */
+            padding: 6px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 0.75rem; /* Smaller font size */
+            font-weight: bold;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            display: block;
+            margin: 0 auto 20px auto; /* Center-align and add margin-bottom */
+        }
+
+        .otp-btn:hover {
+            background-color: #d0d0d0; /* Slightly darker grey on hover */
+        }
+
+        /* Space between the Request OTP and OTP Section */
+        #otp-section {
+            margin-top: 20px; /* Add space between Request OTP button and OTP input field */
+        }
+
+        .login-footer {
+            text-align: center;
+            margin-top: 20px;
+            color: #2c3e50; /* Dark blue for footer text */
+        }
+
+        .login-footer a {
+            color: #3498db; /* Blue for links */
+            text-decoration: underline;
+        }
+
+        .login-footer a:hover {
+            color: #2980b9; /* Darker blue on hover */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        {% with messages = get_flashed_messages(with_categories=true) %}
+            {% if messages %}
+                <ul class="flashes">
+                    {% for category, message in messages %}
+                        <li class="{{ category }}">{{ message }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+        {% endwith %}
+        <h1 class="login-title">Customer Login</h1>
+        <form  method="POST">
+            <input type="email" name="email" placeholder="Email Address"  class="input-field" required>
+            <input type="password" name="password" placeholder="Password" class="input-field" required>
+            
+            <button type="submit" class="submit-btn">Log In</button>
+        </form>
+        <div class="login-footer">
+            <p>Don't have an account? <a href="{{ url_for('register_customer') }}">Sign Up</a></p>
+        </div>
+    </div>
+</body>
+</html>
+>>>>>>> Stashed changes:backend/templates/customer_login.html
